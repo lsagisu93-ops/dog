@@ -5,89 +5,124 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="멍멍통역사 영상에 나온 반려견용품을 영상 속 번호로 찾아보세요.">
 <meta property="og:title" content="반려견용품할인점 | 멍멍통역사">
-<meta property="og:description" content="영상에 나온 그 제품, 영상 속 번호로 찾으세요.">
+<meta property="og:description" content="영상에 나온 그 제품, 번호로 찾아요.">
 <title>반려견용품할인점</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <style>
-/* 레이아웃: 쇼츠 자막(레몬 + 검은 테두리)을 옮겨 온 한 줄짜리 '써봄 노트' — 번호 스티커 + 메모 목록 */
+/* 레이아웃: 강아지가 말풍선으로 "이거 사 줘"를 통역받는 히어로 + 뼈다귀 번호표가 붙은 제품 카드. 밝은 테마 하나로 고정 */
 :root {
-  --bg: #F3F4F1;        /* 살짝 초록기 도는 종이 */
+  color-scheme: light;
+  --sky: #DDEEFF;       /* 바탕 하늘색 */
   --paper: #FFFFFF;
-  --ink: #16181D;
-  --muted: #5E6470;
-  --line: #DADDD6;
-  --lemon: #FFE14A;     /* 쇼츠 자막 노랑 */
-  --lemon-ink: #16181D;
-  --focus: #2F6BFF;
-  --f-display: "Black Han Sans", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-  --f-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
-  --f-num: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --navy: #1E2A47;      /* 글씨 */
+  --soft: #55607A;      /* 보조 글씨 */
+  --line: #C9DBF0;
+  --lemon: #FFD43B;     /* 채널 자막 노랑 */
+  --fur: #E7A55B;       /* 강아지 털 */
+  --fur-dark: #9A5B2E;
+  --pink: #FF8FA3;
+  --f-display: "Jua", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --f-body: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
 }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --bg: #121418; --paper: #1B1E24; --ink: #EEF0EC; --muted: #A2A8B3; --line: #2C3038;
-  --lemon: #FFE14A; --lemon-ink: #16181D; --focus: #7FA3FF; color-scheme: dark } }
-:root[data-theme="dark"] {
-  --bg: #121418; --paper: #1B1E24; --ink: #EEF0EC; --muted: #A2A8B3; --line: #2C3038;
-  --lemon: #FFE14A; --lemon-ink: #16181D; --focus: #7FA3FF; color-scheme: dark }
-
 * { box-sizing: border-box }
+html { background: var(--sky) }
 body {
-  background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.6;
+  background-color: var(--sky); color: var(--navy); font-family: var(--f-body); font-size: 16px; line-height: 1.6;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='%23C9DFF7'%3E%3Cellipse cx='24' cy='30' rx='7' ry='6'/%3E%3Ccircle cx='15' cy='20' r='3'/%3E%3Ccircle cx='21' cy='15' r='3'/%3E%3Ccircle cx='28' cy='15' r='3'/%3E%3Ccircle cx='34' cy='20' r='3'/%3E%3Cg transform='translate(48 48)'%3E%3Cellipse cx='24' cy='30' rx='7' ry='6'/%3E%3Ccircle cx='15' cy='20' r='3'/%3E%3Ccircle cx='21' cy='15' r='3'/%3E%3Ccircle cx='28' cy='15' r='3'/%3E%3Ccircle cx='34' cy='20' r='3'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
-.wrap { max-width: 640px; margin: 0 auto; padding-block: 40px 56px; display: grid; gap: 28px }
+.wrap { max-width: 620px; margin: 0 auto; padding-block: 28px 48px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px }
 
-header { display: grid; gap: 10px }
-.brand { font-family: var(--f-display); font-size: clamp(44px, 12vw, 64px); line-height: 1; letter-spacing: -0.5px; margin: 0;
-  color: var(--lemon); -webkit-text-stroke: 3px var(--ink); paint-order: stroke fill; text-shadow: 0 3px 0 var(--ink) }
-.lede { margin: 0; font-size: 18px; font-weight: 500; text-wrap: balance }
-.disclose { margin: 0; font-size: 13px; color: var(--muted) }
+.hero { position: relative; background: var(--paper); border: 3px solid var(--navy); border-radius: 28px;
+  padding: 22px 20px 0; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; box-shadow: 0 6px 0 var(--navy) }
+.hero h1 { margin: 0; font-family: var(--f-display); font-weight: 400; font-size: clamp(40px, 11vw, 56px); line-height: 1.05; color: var(--navy) }
+.hero h1 span { background: linear-gradient(transparent 58%, var(--lemon) 58%); padding: 0 4px }
+.hero .sub { margin: 0; font-size: 17px; font-weight: 500; color: var(--soft) }
+.stage { display: flex; align-items: flex-end; justify-content: space-between; gap: 8px; margin-top: 8px }
+.bubble { flex: 0 1 auto; min-width: 0; align-self: center; position: relative; background: var(--lemon); border: 3px solid var(--navy); border-radius: 20px;
+  padding: 10px 14px; font-family: var(--f-display); font-size: 20px; line-height: 1.3; max-width: 52% }
+.bubble small { display: block; font-family: var(--f-body); font-size: 12px; color: var(--navy); opacity: .7 }
+.bubble::after { content: ""; position: absolute; right: -14px; bottom: 18px; border: 9px solid transparent; border-left: 14px solid var(--navy) }
+.dog { flex: 0 1 46%; min-width: 0; width: 46%; max-width: 230px; height: auto; display: block }
 
-.finder { display: grid; gap: 8px; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 16px }
-.finder label { font-weight: 700; font-size: 15px }
+.disclose { margin: 0; font-size: 13px; color: var(--soft); background: var(--paper); border-radius: 12px; padding: 10px 14px }
+
+.finder { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; background: var(--paper); border: 3px solid var(--navy); border-radius: 22px; padding: 16px }
+.finder label { font-family: var(--f-display); font-size: 21px }
 .row { display: flex; gap: 8px; flex-wrap: wrap }
-.row input { flex: 1 1 160px; min-width: 0; font: 700 22px var(--f-num); padding: 10px 14px; border-radius: 10px;
-  border: 2px solid var(--ink); background: var(--bg); color: var(--ink) }
-.row button { font: 700 16px var(--f-body); padding: 10px 18px; border-radius: 10px; border: 2px solid var(--ink);
-  background: var(--lemon); color: var(--lemon-ink); cursor: pointer }
-.row button.ghost { background: transparent; color: var(--ink) }
-.hint { margin: 0; font-size: 14px; color: var(--muted); min-height: 1.6em }
-:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px }
+.row input { flex: 1 1 150px; min-width: 0; font: 700 22px var(--f-body); padding: 10px 14px; border-radius: 14px;
+  border: 3px solid var(--navy); background: #F5F9FF; color: var(--navy) }
+.row input::placeholder { color: #8C97AD }
+.row button { font: 400 19px var(--f-display); padding: 10px 18px; border-radius: 14px; border: 3px solid var(--navy);
+  background: var(--lemon); color: var(--navy); cursor: pointer; box-shadow: 0 3px 0 var(--navy) }
+.row button:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--navy) }
+.row button.ghost { background: var(--paper) }
+.hint { margin: 0; font-size: 14px; color: var(--soft); min-height: 1.6em }
+:focus-visible { outline: 3px solid var(--fur-dark); outline-offset: 2px }
 
-.list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px }
-.item { display: grid; grid-template-columns: 72px 1fr; gap: 14px; align-items: start; background: var(--paper);
-  border: 1px solid var(--line); border-radius: 14px; padding: 16px }
-.item.hit { border-color: var(--ink); box-shadow: 0 0 0 3px var(--lemon) }
-.no { font: 700 26px/1 var(--f-num); display: grid; place-items: center; height: 64px; border-radius: 12px;
-  background: var(--lemon); color: var(--lemon-ink); border: 2px solid var(--ink); font-variant-numeric: tabular-nums }
-.no.tbd { font-size: 13px; font-family: var(--f-body); background: transparent; color: var(--muted); border-style: dashed; border-color: var(--line) }
-.body { min-width: 0; display: grid; gap: 6px }
-.tag { font-size: 12px; letter-spacing: 0.04em; color: var(--muted) }
-.name { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.4; text-wrap: balance }
-.memo { margin: 0; color: var(--muted); font-size: 15px }
-.go { justify-self: start; margin-top: 4px; font-weight: 700; font-size: 15px; color: var(--ink); text-decoration: none;
-  border-bottom: 3px solid var(--lemon); padding-bottom: 1px }
-.go:hover { border-bottom-color: var(--ink) }
+.list { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px }
+.item { display: grid; grid-template-columns: 76px 1fr; gap: 14px; align-items: start; background: var(--paper);
+  border: 3px solid var(--navy); border-radius: 22px; padding: 16px }
+.item.hit { background: #FFF6CF }
+.no { position: relative; display: grid; place-items: center; width: 76px; height: 44px; margin-top: 4px }
+.no svg { position: absolute; inset: 0; width: 100%; height: 100% }
+.no b { position: relative; font: 400 22px var(--f-display); color: var(--navy) }
+.no.tbd b { font: 700 12px var(--f-body); color: var(--navy) }
+.body { min-width: 0; display: grid; gap: 4px }
+.tag { font-size: 12px; font-weight: 700; color: var(--fur-dark) }
+.name { margin: 0; font-family: var(--f-display); font-weight: 400; font-size: 21px; line-height: 1.3; text-wrap: balance }
+.memo { margin: 0; color: var(--soft); font-size: 15px }
+.go { justify-self: start; margin-top: 6px; display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 15px;
+  color: var(--navy); text-decoration: none; background: var(--lemon); border: 2px solid var(--navy); border-radius: 999px; padding: 6px 14px }
+.go:hover { background: #FFE27A }
 
-footer { display: grid; gap: 6px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 18px }
-footer a { color: var(--ink) }
-@media (prefers-reduced-motion: no-preference) { .item.hit { transition: box-shadow .2s } }
+footer { display: grid; gap: 4px; justify-items: center; text-align: center; font-size: 13px; color: var(--soft); padding-top: 8px }
+footer .mini { width: 56px; height: auto }
+footer strong { color: var(--navy) }
+@media (prefers-reduced-motion: no-preference) {
+  .tail { transform-origin: 176px 178px; animation: wag .9s ease-in-out infinite alternate }
+  @keyframes wag { from { transform: rotate(-12deg) } to { transform: rotate(14deg) } }
+}
 </style>
 </head>
 <body>
 
 <div class="wrap">
-  <header>
-    <h1 class="brand">멍멍통역사</h1>
-    <p class="lede">영상에 나온 그 제품, 영상 속 번호로 찾으세요.</p>
-    <p class="disclose">이 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
-  </header>
+  <section class="hero" aria-label="멍멍통역사">
+    <h1><span>멍멍통역사</span></h1>
+    <p class="sub">영상에 나온 그 제품, 번호로 찾아요</p>
+    <div class="stage">
+      <p class="bubble">멍! 멍멍!<small>통역: 이거 사 주세요</small></p>
+      <svg class="dog" viewBox="0 0 220 210" role="img" aria-label="웃는 강아지 그림">
+        <ellipse cx="110" cy="204" rx="78" ry="6" fill="#B9D4F0"/>
+        <path class="tail" d="M170 176 q28 -18 26 -48 q-1 -8 -8 -4 q-6 22 -26 34 z" fill="var(--fur)" stroke="var(--navy)" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M58 210 q-6 -62 52 -66 q58 4 52 66 z" fill="var(--fur)" stroke="var(--navy)" stroke-width="4"/>
+        <path d="M90 210 q2 -36 20 -38 q18 2 20 38 z" fill="#FFF3E2"/>
+        <path d="M70 150 q40 18 80 0 l-4 14 q-36 14 -72 0 z" fill="#3E7BFA" stroke="var(--navy)" stroke-width="4" stroke-linejoin="round"/>
+        <circle cx="110" cy="170" r="7" fill="var(--lemon)" stroke="var(--navy)" stroke-width="3"/>
+        <path d="M38 52 q-22 26 -10 66 q14 8 28 -8 q-2 -38 -18 -58 z" fill="var(--fur-dark)" stroke="var(--navy)" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M182 52 q22 26 10 66 q-14 8 -28 -8 q2 -38 18 -58 z" fill="var(--fur-dark)" stroke="var(--navy)" stroke-width="4" stroke-linejoin="round"/>
+        <ellipse cx="110" cy="92" rx="70" ry="62" fill="var(--fur)" stroke="var(--navy)" stroke-width="4"/>
+        <ellipse cx="110" cy="116" rx="40" ry="32" fill="#FFF3E2"/>
+        <ellipse cx="84" cy="88" rx="8" ry="10" fill="var(--navy)"/>
+        <ellipse cx="136" cy="88" rx="8" ry="10" fill="var(--navy)"/>
+        <circle cx="87" cy="84" r="3" fill="#fff"/><circle cx="139" cy="84" r="3" fill="#fff"/>
+        <ellipse cx="110" cy="106" rx="11" ry="8" fill="var(--navy)"/>
+        <path d="M110 114 v8 M96 122 q14 12 28 0" fill="none" stroke="var(--navy)" stroke-width="4" stroke-linecap="round"/>
+        <path d="M104 126 q6 16 12 0" fill="var(--pink)" stroke="var(--navy)" stroke-width="3"/>
+        <ellipse cx="70" cy="108" rx="9" ry="5" fill="var(--pink)" opacity=".7"/>
+        <ellipse cx="150" cy="108" rx="9" ry="5" fill="var(--pink)" opacity=".7"/>
+      </svg>
+    </div>
+  </section>
+
+  <p class="disclose">이 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
 
   <form class="finder" id="finder" autocomplete="off">
-    <label for="q">영상 속 번호</label>
+    <label for="q">영상 속 번호로 찾기</label>
     <div class="row">
       <input id="q" name="q" inputmode="numeric" placeholder="예: 18" aria-describedby="hint">
       <button type="submit">찾기</button>
@@ -99,6 +134,7 @@ footer a { color: var(--ink) }
   <ol class="list" id="list"></ol>
 
   <footer>
+    <svg class="mini" viewBox="0 0 60 50" aria-hidden="true"><g fill="var(--fur-dark)"><ellipse cx="30" cy="34" rx="12" ry="10"/><circle cx="14" cy="20" r="5"/><circle cx="24" cy="11" r="5"/><circle cx="36" cy="11" r="5"/><circle cx="46" cy="20" r="5"/></g></svg>
     <span>영상은 유튜브 <strong>멍멍통역사</strong>에서 볼 수 있어요.</span>
     <span>가격·재고는 바뀔 수 있어요. 구매 전 상품 페이지에서 확인하세요.</span>
     <span>이 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</span>
@@ -108,10 +144,11 @@ footer a { color: var(--ink) }
 <script>
 // ▼ 상품 목록: 새 상품은 여기 한 줄씩 추가 (no = 영상 속 번호, 모르면 null)
 const ITEMS = [
-  { no: null, tag: "반려동물 · 겨울옷", name: "강아지 할매 김장조끼", memo: "꽃무늬 누빔 조끼. 강아지·고양이, 대형견 사이즈까지.", url: "https://link.coupang.com/a/iCrNXz0MAm" },
-  { no: null, tag: "반려동물 · 겨울옷", name: "퍼카라 강아지 패딩 조끼", memo: "하네스가 달린 패딩 조끼. 소형견용 겨울 아우터.", url: "https://link.coupang.com/a/iCrNXF87l6" },
+  { no: null, tag: "겨울옷", name: "강아지 할매 김장조끼", memo: "꽃무늬 누빔 조끼. 강아지·고양이, 대형견 사이즈까지.", url: "https://link.coupang.com/a/iCrNXz0MAm" },
+  { no: null, tag: "겨울옷", name: "퍼카라 강아지 패딩 조끼", memo: "하네스가 달린 패딩 조끼. 소형견용 겨울 아우터.", url: "https://link.coupang.com/a/iCrNXF87l6" },
 ];
 
+const BONE = '<svg viewBox="0 0 76 44" aria-hidden="true"><path d="M14 8a8 8 0 0 1 13 4h22a8 8 0 1 1 13 10 8 8 0 1 1-13 10H27a8 8 0 1 1-13-10A8 8 0 0 1 14 8z" fill="#FFD43B" stroke="#1E2A47" stroke-width="3" stroke-linejoin="round"/></svg>';
 const list = document.getElementById("list");
 const hint = document.getElementById("hint");
 const q = document.getElementById("q");
@@ -124,14 +161,17 @@ function render(filterNo) {
     li.className = "item" + (filterNo != null ? " hit" : "");
     const no = document.createElement("div");
     no.className = "no" + (it.no == null ? " tbd" : "");
-    no.textContent = it.no == null ? "번호 준비중" : it.no;
+    no.innerHTML = BONE;
+    const b = document.createElement("b");
+    b.textContent = it.no == null ? "준비중" : it.no + "번";
+    no.append(b);
     const body = document.createElement("div");
     body.className = "body";
     const tag = document.createElement("span"); tag.className = "tag"; tag.textContent = it.tag;
     const name = document.createElement("h2"); name.className = "name"; name.textContent = it.name;
     const memo = document.createElement("p"); memo.className = "memo"; memo.textContent = it.memo;
     const go = document.createElement("a"); go.className = "go"; go.href = it.url; go.target = "_blank"; go.rel = "noopener sponsored";
-    go.textContent = "제품 보러 가기 ↗";
+    go.textContent = "제품 보러 가기 →";
     body.append(tag, name, memo, go);
     li.append(no, body);
     list.append(li);
