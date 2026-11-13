@@ -160,7 +160,7 @@ function render(filterNo) {
     const thumb = document.createElement("a"); thumb.className = "thumb"; thumb.href = it.url; thumb.target = "_blank"; thumb.rel = "noopener sponsored";
     if (it.img) { const im = document.createElement("img"); im.src = it.img; im.alt = it.name; im.loading = "lazy"; im.width = 104; im.height = 104;
       im.addEventListener("error", () => im.remove()); thumb.append(im); }
-    thumb.append(no);
+    if (it.no != null) thumb.append(no);  // 번호 없는 상품은 번호표를 안 붙임
     li.append(thumb, body);
     list.append(li);
   }
