@@ -65,17 +65,19 @@ body {
 :focus-visible { outline: 3px solid var(--fur-dark); outline-offset: 2px }
 
 .list { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px }
-.item { display: grid; grid-template-columns: 76px 1fr; gap: 14px; align-items: start; background: var(--paper);
+.item { display: grid; grid-template-columns: 104px 1fr; gap: 14px; align-items: start; background: var(--paper);
   border: 3px solid var(--navy); border-radius: 22px; padding: 16px }
 .item.hit { background: #FFF6CF }
-.no { position: relative; display: grid; place-items: center; width: 76px; height: 44px; margin-top: 4px }
+.thumb { position: relative; width: 104px; height: 104px; border-radius: 16px; background: #F5F9FF; border: 2px dashed var(--line) }
+.thumb img { position: absolute; inset: -2px; width: 104px; height: 104px; object-fit: cover; border-radius: 16px; border: 2px solid var(--navy); background: #F5F9FF }
+.no { position: absolute; left: -8px; top: -12px; display: grid; place-items: center; width: 66px; height: 38px }
 .no svg { position: absolute; inset: 0; width: 100%; height: 100% }
-.no b { position: relative; font: 400 22px var(--f-display); color: var(--navy) }
+.no b { position: relative; font: 400 19px var(--f-display); color: var(--navy) }
 .no.tbd b { font: 700 12px var(--f-body); color: var(--navy) }
 .body { min-width: 0; display: grid; gap: 4px }
 .tag { font-size: 12px; font-weight: 700; color: var(--fur-dark) }
-.name { margin: 0; font-family: var(--f-display); font-weight: 400; font-size: 21px; line-height: 1.3; text-wrap: balance }
-.memo { margin: 0; color: var(--soft); font-size: 15px }
+.name { word-break: keep-all; margin: 0; font-family: var(--f-display); font-weight: 400; font-size: 21px; line-height: 1.3; text-wrap: balance }
+.memo { word-break: keep-all; margin: 0; color: var(--soft); font-size: 15px }
 .go { justify-self: start; margin-top: 6px; display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 15px;
   color: var(--navy); text-decoration: none; background: var(--lemon); border: 2px solid var(--navy); border-radius: 999px; padding: 6px 14px }
 .go:hover { background: #FFE27A }
@@ -121,13 +123,13 @@ footer strong { color: var(--navy) }
 </div>
 
 <script>
-// ▼ 상품 목록: 새 상품은 여기 한 줄씩 추가 (no = 영상 속 번호, 모르면 null)
+// ▼ 상품 목록: 새 상품은 여기 한 줄씩 추가 (no = 영상 속 번호, 모르면 null, img = 쿠팡 API productImage)
 const ITEMS = [
-  { no: null, tag: "겨울옷", name: "스타일독 뽀송 기모 라운드", memo: "뽀송한 기모 원단의 라운드 강아지옷.", url: "https://link.coupang.com/re/AFFSDP?lptag=AF3429775&subid=lllhyk93&pageKey=8596102954&itemId=27029544321&vendorItemId=91373085051&traceid=V0-153-bd729debeb5bf70c&clickBeacon=32a0e720-df66-11f1-9cd8-59889447ffa4%7E3&requestid=20261113222905383165431691&token=31850C%7CMIXED&pt=1&slot=5" },
-  { no: null, tag: "겨울옷", name: "바사바사 애견 김장조끼", memo: "할머니 김장조끼 스타일의 강아지 조끼.", url: "https://link.coupang.com/re/AFFSDP?lptag=AF3429775&subid=lllhyk93&pageKey=9236549455&itemId=28068457860&vendorItemId=94275137607&traceid=V0-153-f67c49f946d3f8bf&requestid=20261113222905907239602413&token=31850C%7CMIXED&pt=0&slot=6" },
-  { no: null, tag: "겨울옷", name: "모란빛케어 김장조끼", memo: "털안감 누빔 조끼. 등 똑딱이로 입히고, 리드줄 연결 고리가 있어요.", url: "https://link.coupang.com/re/AFFSDP?lptag=AF3429775&subid=lllhyk93&pageKey=9788131878&itemId=29305995659&vendorItemId=96221354784&traceid=V0-153-d9d0d365ff5b27e4&clickBeacon=32a0c010-df66-11f1-8c53-6a87a58de28d%7E3&requestid=20261113222905383165431691&token=31850C%7CMIXED&pt=1&slot=1" },
-  { no: null, tag: "겨울옷", name: "강아지 할매 김장조끼", memo: "꽃무늬 누빔 조끼. 강아지·고양이, 대형견 사이즈까지.", url: "https://link.coupang.com/a/iCrNXz0MAm" },
-  { no: null, tag: "겨울옷", name: "퍼카라 강아지 패딩 조끼", memo: "하네스가 달린 패딩 조끼. 소형견용 겨울 아우터.", url: "https://link.coupang.com/a/iCrNXF87l6" },
+  { no: null, tag: "겨울옷", name: "스타일독 뽀송 기모 라운드", img: "https://ads-partners.coupang.com/image1/EapEHlZExtrctvf7EcFQY7cOAryvXwWBSN-OSCvMI9Xmgq9enI9B9-f07w6-6N1gsz6b2VjOCosY_MEjYZTaE9f6NCTkQVV73Dt4aWQdhaocchnu27jrgYhFXhLaYtXvKUpCr4-M-4k5oZxbX7v877ctPPgBUgoSBvqTJTQO6Crj26VfUQpYwzoOCCssrSymaYdrOJrRMWHsAlaiJlYMpNUcvWqbvmMGkia56vFBUzxYqJCBdTnjKs6yGUIuvn40ZvNh92Z2Zg8WOgbI455IuczLqDbC5VBzJSY2Zj7CHZ-SRDd3kQ0rpxIY_wBGjFuBUdbOQCe4OuNV9yfDsqqnpm3Hz7aeM_X7uzUyRgpeW0LmHtb5BPJ70fNv0n3Ba-XXhuP9TUm_Prk7JsFzvJ3tkOdVxHZaXvMnt_iBYyRJImhNUXf9tbPBLrvMdijwYfW3X2qDpCxUKcAMhSsW_io8IdrZCpVqwpQjsiiR1PC-vm591mGQJoffbJtF9nnwTKeuqI0ocv8l8J2nIO47MPjdRJ8T1SdP7tn4wyYjpkKmuA0qHUlKg04D6_brhLIDaInpeDrzR_S-9gr58guIS9BdmMEg8CiruV4sqNFxVg==", memo: "뽀송한 기모 원단의 라운드 강아지옷.", url: "https://link.coupang.com/re/AFFSDP?lptag=AF3429775&subid=lllhyk93&pageKey=8596102954&itemId=27029544321&vendorItemId=91373085051&traceid=V0-153-bd729debeb5bf70c&clickBeacon=32a0e720-df66-11f1-9cd8-59889447ffa4%7E3&requestid=20261113222905383165431691&token=31850C%7CMIXED&pt=1&slot=5" },
+  { no: null, tag: "겨울옷", name: "바사바사 애견 김장조끼", img: "https://ads-partners.coupang.com/image1/d9BjxRs5SHN724JFd3o-IxiNzqXvJIXIlBpC2gT4pPVhfO52KQrLnBCuhp6OZKFHCTysfV72rzla_J4O-4UTIXTADdGMIUQDGeMKvX6gQlRoYbE_KPkcMDQdYX4GwMvl3pC4e2DCsO9TGAbjD53dr-A8o20v0kGhviZpvM_gsxeWNT6tR8Yz-GrmcDALNnJT5poMwWnXfilQwtU4CFkVzGSDjXzatsR08XxMfDb_XhebB9StfSr-A6O7J5WOBkyrvE6Y-fN3EsHp6G5owgH3QFqPeN6b_fUUCQSXZ_4dl-sZmJfhUgDY9EJmmfdacJbKmVtX4Wgv0He00QazIhRz6oJyw-5O6TPu66tviNi43Fodv54b1pSTpsB0PXw0WNSpOoUdfG6-vX8FB1uwaYuIfEUpMOZni4gT7hwGm-PkTAmBVmanY_9Tyo68vLS-uSfx3LjMN-nd_7mZWpf9Jl4oZeHsfi4EWddSR_NJ0L5Dp5LwdM2M9L_pOztoehqB9h4FxgMTvgNQbyae6cDfrHMMwYToGAofGU0qFMaVLBCOlakZ48CWPANpwI4NWCVYjqocdhPHm0Dupl5lEX6UlOd0TL6lB9zXGtGMrtuFVRu456b5eocHf2jjdA==", memo: "할머니 김장조끼 스타일의 강아지 조끼.", url: "https://link.coupang.com/re/AFFSDP?lptag=AF3429775&subid=lllhyk93&pageKey=9236549455&itemId=28068457860&vendorItemId=94275137607&traceid=V0-153-f67c49f946d3f8bf&requestid=20261113222905907239602413&token=31850C%7CMIXED&pt=0&slot=6" },
+  { no: null, tag: "겨울옷", name: "모란빛케어 김장조끼", img: "https://ads-partners.coupang.com/image1/jYksxSivk4RkjjYljblnpUxVYPvPWPm0Ymt0glIyv4oNYEKDd-BqaAFIt0Aah1Wk1XOv9BK4nyjGWlImkoKSNGxW5WPAwflJ_v2PgqZ98Zy1QPep4tNRZoMxFpFIU4OX3HzXXYV7EwhDuFkff09FGWVzqfz4Iq6L5bBvLLHr-h8cLLoLQaO4EMy5loBVIDZbDA3J3AcpCEn8_0JdE8jsy3WbyIZ0SImB7FwhJLvt74HulAueZNv4mn5k1bt5_26-GtjCAIPW7p75qh85Cnuao20_0jUfbLwuEqWTzIZmS_SwOpWE8dMNKHYS5Dsm-O8ySpTp4ONU8aBE2kRH2zetP-PUBMVFmJb1JdBY_I2v8LzyCeEgUbWvbj5cYDzDnSwnLUwM76yGwHjrFmpxCyrLk5ZnxMydrstjmHe2y7Jgs9wJgKW86GpYoJeUPFObatDtLadFX_C0TEelltt1WGCbwdE0ycWMCQD8a0-bWOD8rRN95iCcR2iBi3sqoyqxTcZpqtiqSvf_4_cUp9viDsJ5tl1wDugLA--uosfjMVWguOHY_9XEiWbEPnkLtm2eDMnUs9OU8wfgoLEOsiMCoQzC8P5LJtkQ9JOWXkReew==", memo: "털안감 누빔 조끼. 등 똑딱이로 입히고, 리드줄 연결 고리가 있어요.", url: "https://link.coupang.com/re/AFFSDP?lptag=AF3429775&subid=lllhyk93&pageKey=9788131878&itemId=29305995659&vendorItemId=96221354784&traceid=V0-153-d9d0d365ff5b27e4&clickBeacon=32a0c010-df66-11f1-8c53-6a87a58de28d%7E3&requestid=20261113222905383165431691&token=31850C%7CMIXED&pt=1&slot=1" },
+  { no: null, tag: "겨울옷", name: "강아지 할매 김장조끼", img: "https://ads-partners.coupang.com/image1/9LsgmVct7Qd84CY89FJuFRcX_XmwO0m3c-Lxe26u-U4m5XtXhp39dfQwlEvjus8E3GHHunKSOQUzU0JoubZkHUGyXXnEW17EcvBBfWGfK-C5ifpokcyPs39L9eiq1DvZ7H62pWZMixgT6z1pNpc8JGDQm-G1RBze-KKg6naFvZKcFe6iZw4ZjoK_u-B82_2ttn-Jo4IeK8o3Ws_Oa1RwmwdeF_HNb6-6UI2gFRbfFm9FEEhbpYDZVvHcFBNZpboskezg13ramJvKVAJTSxDuVEvsAB1IrO89TawOK2gw6PxOoa_DSTw_jMPQFrjhQEza2nCn_Y8aLe5RSSYhy8625BMFFMAmXZpl6jfN78WtV4NSZwwaNx3j22T9Oyab5Z1H6nk7t4w-D3ubH0lnzGkYOen2cvB3KweabzVp9w06dz2KeN2--D-2_hshvuylaTKvdT588MnZky-3qBbLtxQ7QFVnVSM-vAHME17Z3dglw_Hy42AURuaNbaQdugp6tyNw0M6sdV9SvGoU7xeBb_un8eBONbfOBfjLAJTNwvdY6Moo9nKprXrEPquY", memo: "꽃무늬 누빔 조끼. 강아지·고양이, 대형견 사이즈까지.", url: "https://link.coupang.com/a/iCrNXz0MAm" },
+  { no: null, tag: "겨울옷", name: "퍼카라 강아지 패딩 조끼", img: "https://ads-partners.coupang.com/image1/LTBnCeli41fFPrGlLQ0J8hDOUrIklGggD9yJwW71zdU2BCJtWi6YeayPzBffr_E7fqSx4KWAyqYTl_XrilOaxB81XoLsVRnT5GL-4V_02xifNeiUoeq1CeqixG-Dghn1KxpVWgOghDrkYEjkwiEI_npyjOg4HakwgNO1uOPFD7w68p-aHTuRej55g2738D-ribKkzpIi8HDlC7KsxmwzaOjpVSfuAF_tEd00smp7YPVbQMDWHSUVr9PjH2vFrvoGeECXMZj_d_RJZuNm1dRcsaM3wfu8VZwbIUN1zfzWkq231DjdiB23yBVGoThNfmpq0E2YIUt423_OwtJte-vtXH8z4W5U5hl8NVXHEJNZkoWDYJmebtDQwfIywAi7icuJNw_oDHrpwIPYQvXj5YAW6jNuv6K4EAraKWVDXRXZoDsbwb4p5iQw4MUP5DEog6GJWRes40w6Xbw4OkHrDcVpnAt8-EtuzXYWhT1IVjvtMH4k1TfRGbJ4VeM1HnLngePHfNZZTkZMyxN_zb5NVJPEYv3Gk8o4UASnTlGBJi_trnqhJXo_5hJMLcBm2pElTFyAzXnIqh0=", memo: "하네스가 달린 패딩 조끼. 소형견용 겨울 아우터.", url: "https://link.coupang.com/a/iCrNXF87l6" },
 ];
 
 const BONE = '<svg viewBox="0 0 76 44" aria-hidden="true"><path d="M14 8a8 8 0 0 1 13 4h22a8 8 0 1 1 13 10 8 8 0 1 1-13 10H27a8 8 0 1 1-13-10A8 8 0 0 1 14 8z" fill="#FFD43B" stroke="#1E2A47" stroke-width="3" stroke-linejoin="round"/></svg>';
@@ -155,7 +157,11 @@ function render(filterNo) {
     const go = document.createElement("a"); go.className = "go"; go.href = it.url; go.target = "_blank"; go.rel = "noopener sponsored";
     go.textContent = "제품 보러 가기 →";
     body.append(tag, name, memo, go);
-    li.append(no, body);
+    const thumb = document.createElement("a"); thumb.className = "thumb"; thumb.href = it.url; thumb.target = "_blank"; thumb.rel = "noopener sponsored";
+    if (it.img) { const im = document.createElement("img"); im.src = it.img; im.alt = it.name; im.loading = "lazy"; im.width = 104; im.height = 104;
+      im.addEventListener("error", () => im.remove()); thumb.append(im); }
+    thumb.append(no);
+    li.append(thumb, body);
     list.append(li);
   }
   return shown.length;
