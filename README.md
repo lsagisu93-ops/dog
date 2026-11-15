@@ -1,6 +1,6 @@
 # 반려견할인용품점 — 멍멍통역사
 
 영상에 나온 반려견용품을 영상 속 번호로 찾는 페이지.
-https://lsagisu93-ops.github.io/dog/
+https://mungmung-shop.github.io/
 
 이 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
